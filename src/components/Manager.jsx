@@ -1,7 +1,15 @@
-import React, { useState } from 'react'
-
+import React, { useRef } from 'react'
 const Manager = () => {
-    const [visible, setVisible] = useState("public\\icons\\eye.png");
+    const ref = useRef();
+    const showPassword = () => {
+        // alert('Show password functionality is not implemented yet');
+        if(ref.current.src.includes("public/icons/eye.png")){
+            ref.current.src="public/icons/eyecross.png";
+        }
+        else{
+            ref.current.src="public/icons/eye.png";
+        }
+    }
     return (
         <>
             <div className="absolute inset-0 -z-10 h-full w-full bg-slate-400 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"><div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C9EBFF,transparent)]"></div>
@@ -22,16 +30,8 @@ const Manager = () => {
                         <div className="relative">
 
                         <input placeholder='Enter password' className='rounded-full border border-black-500 w-full text-black p-4 py-1' type="text" name='' id='' />
-                        <span className='absolute right-1 top-1'>
-                            <img 
-                            onClick={()=>{
-                                if(visible === "public\\icons\\eye.png"){
-                                    setVisible("public\\icons\\eyecross.png");
-                                }else{
-                                    setVisible("public\\icons\\eye.png");
-                                }
-                            }}
-                            className='cursor-pointer' width={25} src={visible} alt="eye"  />
+                        <span className='absolute right-[3px] top-[4px] cursor-pointer' onClick={showPassword}>
+                            <img ref={ref} className='p-1'  width={26} src="public\icons\eye.png" alt="eye"  />
                         </span>
                         </div>
                     </div>
