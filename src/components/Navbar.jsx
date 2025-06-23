@@ -8,20 +8,24 @@ const Navbar = () => {
 
         <div className='logo font-bold text-2xl'>
           <span className='text-green-700'>
-             &lt;
-            </span>
+            &lt;
+          </span>
           Pass
           <span className='text-green-700'>
             OP/&gt;
-            </span>
-            </div>
-      <ul>
-        <li className='flex gap-4'>
+          </span>
+        </div>
+
+        {/* <ul>
+          <li className='flex gap-4'>
             <a className='hover:font-bold' href="#">Home</a>
             <a className='hover:font-bold' href="#">About</a>
             <a className='hover:font-bold' href="#">Contact</a>
-        </li>
-      </ul>
+          </li>
+        </ul> */}
+        <button className='text-white cursor-pointer'>
+          <img className='invert p-5 w-20' src="/public/icons/github.svg" alt="" />
+        </button>
       </div>
     </nav>
   )
