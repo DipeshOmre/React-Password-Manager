@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Manager = () => {
+    const [visible, setVisible] = useState("public\\icons\\eye.png");
     return (
         <>
             <div className="absolute inset-0 -z-10 h-full w-full bg-slate-400 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"><div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C9EBFF,transparent)]"></div>
@@ -18,10 +19,20 @@ const Manager = () => {
                     <input placeholder='Enter website URL' className='rounded-full border border-black-500 w-full text-black p-4 py-1' type="text" name='' id='' />
                     <div className="flex w-full justify-between gap-8">
                         <input placeholder='Enter username' className='rounded-full border border-black-500 w-full text-black p-4 py-1' type="text" name='' id='' />
-                        <div className="relative flex justify-center items-center gap-3">
+                        <div className="relative">
 
                         <input placeholder='Enter password' className='rounded-full border border-black-500 w-full text-black p-4 py-1' type="text" name='' id='' />
-                        <span className='absolute right-1'>show</span>
+                        <span className='absolute right-1 top-1'>
+                            <img 
+                            onClick={()=>{
+                                if(visible === "public\\icons\\eye.png"){
+                                    setVisible("public\\icons\\eyecross.png");
+                                }else{
+                                    setVisible("public\\icons\\eye.png");
+                                }
+                            }}
+                            className='cursor-pointer' width={25} src={visible} alt="eye"  />
+                        </span>
                         </div>
                     </div>
                     <button className='flex items-center justify-center bg-green-500 px-8 py-2
