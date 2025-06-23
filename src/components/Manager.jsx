@@ -1,14 +1,47 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 const Manager = () => {
+    const [form, setform] = useState({
+        site: "",
+        username: "",
+        password: ""
+    })
+    const [passwordArray, setPasswordArray] = useState([])
+    useEffect(() => {
+       let passwords=localStorage.getItem("passwords");
+        if(passwords){
+            setPasswordArray(JSON.parse(passwords));
+        }
+        
+    }, [])
+    
     const ref = useRef();
     const showPassword = () => {
-        // alert('Show password functionality is not implemented yet');
+    
         if(ref.current.src.includes("public/icons/eye.png")){
             ref.current.src="public/icons/eyecross.png";
         }
         else{
             ref.current.src="public/icons/eye.png";
         }
+    }
+    const savePassword = (e) => {
+        console.log(form);
+        setPasswordArray([...passwordArray,form]);
+        localStorage.setItem("passwords",JSON.stringify([...passwordArray,form]))
+        console.log([...passwordArray,form])
+        e.preventDefault();
+        setform({
+            site:"",
+            username:"",
+            password: "",
+        })
+        console.log("Password saved");
+    }
+    const handleChange = (e) => {
+        setform({
+            ...form,
+            [e.target.name]: e.target.value
+        })
     }
     return (
         <>
@@ -24,18 +57,18 @@ const Manager = () => {
                     </span></h1>
                 <p className='text-green-900 text-lg text-center'>Your name password manager</p>
                 <div className='flex flex-col p-4 gap-8 items-center'>
-                    <input placeholder='Enter website URL' className='rounded-full border border-black-500 w-full text-black p-4 py-1' type="text" name='' id='' />
+                    <input value={form.site} onChange={handleChange} placeholder='Enter website URL' className='rounded-full border border-black-500 w-full text-black p-4 py-1' type="text" name='site' id='1' />
                     <div className="flex w-full justify-between gap-8">
-                        <input placeholder='Enter username' className='rounded-full border border-black-500 w-full text-black p-4 py-1' type="text" name='' id='' />
+                        <input value={form.username} onChange={handleChange} placeholder='Enter username' className='rounded-full border border-black-500 w-full text-black p-4 py-1' type="text" name='username' id='2' />
                         <div className="relative">
 
-                        <input placeholder='Enter password' className='rounded-full border border-black-500 w-full text-black p-4 py-1' type="text" name='' id='' />
+                        <input value={form.password} onChange={handleChange} placeholder='Enter password' className='rounded-full border border-black-500 w-full text-black p-4 py-1' type="text" name='password' id='3' />
                         <span className='absolute right-[3px] top-[4px] cursor-pointer' onClick={showPassword}>
                             <img ref={ref} className='p-1'  width={26} src="public\icons\eye.png" alt="eye"  />
                         </span>
                         </div>
                     </div>
-                    <button className='flex items-center justify-center bg-green-500 px-8 py-2
+                    <button onClick={savePassword} className='flex items-center justify-center bg-green-500 px-8 py-2
                     rounded-full w-fit text-center hover:bg-green-400 gap-2 border border-green-800'>
                         <lord-icon
                             src="https://cdn.lordicon.com/jgnvfzqg.json"
