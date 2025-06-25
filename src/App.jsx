@@ -8,10 +8,8 @@ const App = () => {
   return (
    <>
    <Navbar/>
-   <div className='min-h-[83vh]'>
 
    <Manager/>
-   </div>
    <Footer/>
    </>
   )
